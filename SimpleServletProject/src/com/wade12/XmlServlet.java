@@ -7,15 +7,27 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class XmlServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// System.out.println("xml servlet called.");
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
+		PrintWriter writer = response.getWriter();
 		String userName = request.getParameter("userName");
-		out.println("Dia Duit " + userName + " from doGet method");
+		
+		/*
+		HttpSession session = request.getSession();
+		if ( (userName != "") && (userName != null) ) {
+			session.setAttribute("savedUserName", userName);
+		} // end if
+		// writer.println("Dia Duit " + userName + " from doGet method");
+		writer.println("Request parameter has userName: " + userName);
+		writer.println("Session parameter has userName: " + (String) session.getAttribute("savedUserName"));
+		*/
+		
+		writer.println("Dia Duit " + userName + " from doGet method");
 	} // end method doGet
 	
 	// post parameter requires html form
