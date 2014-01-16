@@ -3,11 +3,16 @@ package com.wade12;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+@WebServlet(description="Simple Sevlet", urlPatterns={ "/SimpleServletPath"}, 
+				initParams={@WebInitParam(name="defaultUser", value="Paddy Murphy")})
 
 public class XmlServlet extends HttpServlet {
 
@@ -17,15 +22,19 @@ public class XmlServlet extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		String userName = request.getParameter("userName");
 		
-		/*
+		
 		HttpSession session = request.getSession();
+		ServletContext context = request.getServletContext();
 		if ( (userName != "") && (userName != null) ) {
 			session.setAttribute("savedUserName", userName);
+			context.setAttribute("savedUserName", userName);
 		} // end if
 		// writer.println("Dia Duit " + userName + " from doGet method");
 		writer.println("Request parameter has userName: " + userName);
 		writer.println("Session parameter has userName: " + (String) session.getAttribute("savedUserName"));
-		*/
+		writer.println("Context parameter has userName: " + (String) context.getAttribute("savedUserName"));
+		this.getServletConfig().getInitParameter("defaultUser");
+		
 		
 		writer.println("Dia Duit " + userName + " from doGet method");
 	} // end method doGet
